@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import TopicsProvider from "./context/TopicsContext";
+import Header from "./header/components/Header";
+import Topic from "./topic/components/Topic";
+import Topics from "./topic/components/Topics";
 
 function App() {
+
+  const [selectedTopic, setSelectTopic] = useState({
+    id: '',
+    name: ''
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <TopicsProvider>
+      <Header
+        title='My Topic Explorer App'
+      />
+
+      <div className="container-topics">
+        <div className="container">
+          <div className="row">
+            <div className="col m6 s12">
+              <Topics setSelectTopic={setSelectTopic}/>
+            </div>
+
+            <div className="col m6 s12">
+              <Topic selectedTopic={selectedTopic}/>
+            </div> 
+
+          </div>
+        </div>
+      </div>
+    </TopicsProvider>
   );
 }
 
